@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\User;
 
+use Spatie\Permission\Models\Role;
+
 class UsersController extends Controller
 {
     /**
@@ -27,7 +29,9 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::all()->pluck('name', 'id');
+
+        return view('usuarios.create', compact('roles'));
     }
 
     /**
@@ -38,7 +42,21 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      // dd($request->all());
+        $usuario = new User;
+
+        $usuario->name = $request->name;
+        $usuario->email = $request->email;
+        $usuario->password = bcrypt($request->password);
+
+        if ($usuario->save()) {
+          // asignar el rol
+          $usuario->assignRole($request->rol);
+
+          return redirect('/usuarios');;
+        }
+
+
     }
 
     /**

@@ -9,7 +9,7 @@
 
                   <div class="card-body">
                       <div class="row justify-content-end pb-2">
-                        <a href="#" class="btn btn-success">Nuevo usuario</a>
+                        <a href="{{ url('/usuarios/create') }}" class="btn btn-success">Nuevo usuario</a>
                       </div>
 
                       <table class="table">
