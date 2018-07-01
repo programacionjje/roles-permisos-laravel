@@ -78,7 +78,11 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $usuario = User::findOrFail($id);
+
+        $roles = Role::all()->pluck('name', 'id');
+
+        return view('usuarios.edit', compact('usuario', 'roles'));
     }
 
     /**
@@ -90,7 +94,20 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $usuario = User::findOrFail($id);
+
+        $usuario->name = $request->name;
+        $usuario->email = $request->email;
+
+        if ($request->password != null) {
+            $usuario->password = $request->password;
+        }
+
+        $usuario->syncRoles([$request->rol]);
+
+        $usuario->save();
+
+        return redirect('/usuarios');
     }
 
     /**

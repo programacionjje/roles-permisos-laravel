@@ -16,6 +16,7 @@
                         <thead>
                           <th>Name</th>
                           <th>Email</th>
+                          <th>Rol</th>
                           <th>Acciones</th>
                         </thead>
                         <tbody>
@@ -23,8 +24,9 @@
                             <tr>
                               <td>{{ $usuario->name }}</td>
                               <td>{{ $usuario->email }}</td>
+                              <td>{{ $usuario->roles->implode('name', ', ') }}</td>
                               <td>
-                                <a href="#" class="btn btn-primary">Editar</a>
+                                <a href="{{ url('usuarios/'.$usuario->id.'/edit') }}" class="btn btn-primary">Editar</a>
                                 <a href="#" class="btn btn-danger">Eliminar</a>
                               </td>
                             </tr>
