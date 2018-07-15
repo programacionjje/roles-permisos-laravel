@@ -118,6 +118,16 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $usuario = User::findOrFail($id);
+
+        $usuario->removeRole($usuario->roles->implode('name', ', '));
+
+        if ($usuario->delete()) {
+            return redirect('/usuarios');
+        }
+
+        return response()->json([
+            'mensaje' => 'Error al eliminar el usuario.'
+        ]);
     }
 }
