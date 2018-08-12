@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
         $editor = User::create([
           'name' => 'editor',
           'email' => 'editor@gmail.com',
-          'password' => bcrypt('123456')
+          'password' => '123456'
         ]);
 
         $editor->assignRole('editor');
@@ -26,7 +26,7 @@ class UsersTableSeeder extends Seeder
         $moderador = User::create([
           'name' => 'moderador',
           'email' => 'moderador@gmail.com',
-          'password' => bcrypt('123456')
+          'password' => '123456'
         ]);
 
         $moderador->assignRole('moderador');
@@ -35,7 +35,7 @@ class UsersTableSeeder extends Seeder
         $admin = User::create([
           'name' => 'admin',
           'email' => 'admin@gmail.com',
-          'password' => bcrypt('123456')
+          'password' => '123456'
         ]);
 
         $admin->assignRole('super-admin');

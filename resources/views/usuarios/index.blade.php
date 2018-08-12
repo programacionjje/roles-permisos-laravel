@@ -8,9 +8,11 @@
                   <div class="card-header">Lista de usuarios</div>
 
                   <div class="card-body">
-                      <div class="row justify-content-end pb-2">
-                        <a href="{{ url('/usuarios/create') }}" class="btn btn-success">Nuevo usuario</a>
-                      </div>
+                      @can('create user')
+                          <div class="row justify-content-end pb-2">
+                            <a href="{{ url('/usuarios/create') }}" class="btn btn-success">Nuevo usuario</a>
+                        </div>
+                     @endcan
 
                       <table class="table">
                         <thead>
@@ -26,8 +28,12 @@
                               <td>{{ $usuario->email }}</td>
                               <td>{{ $usuario->roles->implode('name', ', ') }}</td>
                               <td>
-                                <a href="{{ url('usuarios/'.$usuario->id.'/edit') }}" class="btn btn-primary">Editar</a>
-                                @include('usuarios.delete', ['usuario' => $usuario])
+                                @can('update user')
+                                    <a href="{{ url('usuarios/'.$usuario->id.'/edit') }}" class="btn btn-primary">Editar</a>
+                                @endcan
+                                @can('delete user')
+                                    @include('usuarios.delete', ['usuario' => $usuario])
+                                @endcan
                               </td>
                             </tr>
                           @endforeach
